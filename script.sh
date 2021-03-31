@@ -8,8 +8,8 @@
 ### Google Dynamic DNS: https://support.google.com/domains/answer/6147083
 ### Synthetic Records: https://support.google.com/domains/answer/6069273
 
-USERNAME="91WNgrpXYqOy5aVG"
-PASSWORD="WIrwxzfme36ctp3Q"
+USERNAME=
+PASSWORD=
 HOSTNAME="raspi.peterlamontagne.com"
 DATE=$(date +"%d/%m@%H:%M")
 
