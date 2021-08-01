@@ -8,20 +8,20 @@
 ### Google Dynamic DNS: https://support.google.com/domains/answer/6147083
 ### Synthetic Records: https://support.google.com/domains/answer/6069273
 
-USERNAME=
-PASSWORD=
+USERNAME=""
+PASSWORD=""
 HOSTNAME="raspi.peterlamontagne.com"
 DATE=$(date +"%d/%m@%H:%M")
 
 
 # Resolve current public IP
-IP=$( dig +short myip.opendns.com @resolver1.opendns.com )
+IP=$( curl --ipv4 -s http://icanhazip.com )
 # Update Google DNS Record
 URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
 OUTPUT=$(curl -s $URL)
 
-printf "Time:%s  " $DATE >> log.txt
-printf "%s  " $OUTPUT >> log.txt
-printf "\n\n\n" >> log.txt
+printf "Time:%s  " $DATE
+printf "%s  " $OUTPUT
+printf "\n"
 
 
