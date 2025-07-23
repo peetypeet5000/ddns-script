@@ -14,9 +14,10 @@ DNS_NAME="your_dns_name"
 TTL=120
 PROXIED=false
 
+DATE=$(date +"%d/%m@%H:%M")
 
 # Resolve current public IP
-IP=$( curl --ipv4 -s http://icanhazip.com )
+CURRENT_IP=$( curl --ipv4 -s http://icanhazip.com )
 
 # Request current DNS record from Cloudflare
 DNS_RECORD=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
@@ -41,11 +42,13 @@ UPDATE_RESPONSE=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZO
 if echo $UPDATE_RESPONSE | jq -e '.success' > /dev/null; then
     echo "DNS record updated successfully to $CURRENT_IP"
     printf "Time:%s  " $DATE
-    printf "%s  " $OUTPUT
     printf "\n"
+    exit 0
 else
     echo "Failed to update DNS record"
     echo $UPDATE_RESPONSE | jq
+    printf "Time:%s  " $DATE
+    printf "\n"
     exit 1
 fi
 
